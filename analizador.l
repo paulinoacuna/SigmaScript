@@ -6,10 +6,6 @@
 #include <stdio.h>
 #include <string.h>
 
-int f1=0,f2=0;
-char oper;
-float op1=0,op2=0,ans=0;
-void eval();
 void print(char *value, char *category);
 
 %}
@@ -19,15 +15,28 @@ DIGIT [0-9]
 NUMBER {DIGIT}+(\.{DIGIT}+)?
 VARIABLE [a-zA-Z][a-zA-Z0-9]*
 ARRAY "["|"]"
+GROUP "("|")"
+BLOK "{"|"}"
 COMPARISON_OPERATOR ==|!=|<=|>=|<|>
 ARITHMETIC_OPERATOR [*/+-]
-LOGICAL_OPERATOR ["&&""||"]
+LOGICAL_OPERATOR &&|\|\|
 ASSIGNMENT_OPERATOR =
-CHAIN \[[a-z]*\]
-
+FUNCTION_CALL {VARIABLE}\({NUMBER}\)
 
  
+
+CHAIN \"[a-z]*\"
+ 
 %%
+
+{FUNCTION_CALL} {
+    print(yytext,"FUNCTION_CALL");
+}
+
+{ARRAY} {
+    print(yytext,"ARRAY");
+}
+
 
 {NUMBER} {
     print(yytext,"NUMBER");
@@ -38,13 +47,17 @@ CHAIN \[[a-z]*\]
 }
 
 
-
 {VARIABLE} {
     print(yytext,"VARIABLE");
 }
  
-{ARRAY} {
-    print(yytext,"ARRAY");
+
+{GROUP} {
+    print(yytext,"GROUP");
+}
+
+{BLOK} {
+    print(yytext,"BLOK");
 }
 
 
@@ -63,6 +76,11 @@ CHAIN \[[a-z]*\]
 {ASSIGNMENT_OPERATOR} {
     print(yytext,"ASSIGNMENT_OPERATOR");
 }
+
+
+{CHAIN} {
+    print(yytext,"CHAIN");
+}
  
  
 %%
@@ -77,7 +95,7 @@ void print(char *value, char *category)
 {
     if(strcmp(value,";") == 1)
     {
-        printf("\n");
+        printf(" holo \n");
     }
 
     
