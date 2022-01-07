@@ -10,7 +10,7 @@ void print(char *value, char *category);
 
 %}
  
-KEYWORDS fun|cat|if|else|while|model|set|with|return 
+KEYWORDS fun|cat|if|else|while|model|set|with|return|model
 DIGIT [0-9]
 NUMBER {DIGIT}+(\.{DIGIT}+)?
 VARIABLE [a-zA-Z][a-zA-Z0-9]*
@@ -21,9 +21,10 @@ COMPARISON_OPERATOR ==|!=|<=|>=|<|>
 ARITHMETIC_OPERATOR [*/+-]
 LOGICAL_OPERATOR &&|\|\|
 ASSIGNMENT_OPERATOR =
-FUNCTION_CALL {VARIABLE}\({NUMBER}\)
+FUNCTION_CALL {VARIABLE}\({[NUMBER|VARIABLE]*}\)
 
- 
+ARITHMETIC_OPERATION [{NUMBER}\b{ARITHMETIC_OPERATOR}]+{NUMBER}
+
 
 CHAIN \"[a-z]*\"
  
@@ -75,6 +76,10 @@ CHAIN \"[a-z]*\"
 
 {ASSIGNMENT_OPERATOR} {
     print(yytext,"ASSIGNMENT_OPERATOR");
+}
+
+{ARITHMETIC_OPERATION} {
+    print(yytext,"ARITHMETIC_OPERATION");
 }
 
 
