@@ -704,9 +704,9 @@ static char *yy_last_accepting_cpos;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 ".\\analizador.l"
+#line 1 "analizador.l"
 #define INITIAL 0
-#line 2 ".\\analizador.l"
+#line 2 "analizador.l"
 
 #undef yywrap
 #define yywrap() 1 
@@ -866,7 +866,7 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 42 ".\\analizador.l"
+#line 42 "analizador.l"
 
 
 #line 873 "lex.yy.c"
@@ -954,140 +954,140 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 44 ".\\analizador.l"
+#line 44 "analizador.l"
 {
     print(yytext, "ITERATION");
 }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 48 ".\\analizador.l"
+#line 48 "analizador.l"
 {
     print(yytext, "CONTROL");
 }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 52 ".\\analizador.l"
+#line 52 "analizador.l"
 {
     print(yytext, "ALLOCATION");
 }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 56 ".\\analizador.l"
+#line 56 "analizador.l"
 {
     print(yytext, "FUNCTION");
 }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 60 ".\\analizador.l"
+#line 60 "analizador.l"
 {
     print(yytext, "FUNCTION_CALL");
 }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 64 ".\\analizador.l"
+#line 64 "analizador.l"
 {
     print(yytext, "LOGICAL_OPERATION");
 }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 68 ".\\analizador.l"
+#line 68 "analizador.l"
 {
     print(yytext, "COMPARISON_OPERATION");
 }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 73 ".\\analizador.l"
+#line 73 "analizador.l"
 {
     print(yytext,"ARRAY");
 }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 77 ".\\analizador.l"
+#line 77 "analizador.l"
 {
     print(yytext,"MATRIX");
 }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 82 ".\\analizador.l"
+#line 82 "analizador.l"
 {
     print(yytext,"NUMBER");
 } 
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 86 ".\\analizador.l"
+#line 86 "analizador.l"
 {
     print(yytext,"KEYWORD");
 }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 90 ".\\analizador.l"
+#line 90 "analizador.l"
 {
     print(yytext,"VARIABLE");
 }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 95 ".\\analizador.l"
+#line 95 "analizador.l"
 {
     print(yytext,"GROUP");
 }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 99 ".\\analizador.l"
+#line 99 "analizador.l"
 {
     print(yytext,"BLOK");
 }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 104 ".\\analizador.l"
+#line 104 "analizador.l"
 {
     print(yytext,"COMPARISON_OPERATOR");
 }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 108 ".\\analizador.l"
+#line 108 "analizador.l"
 {
     print(yytext,"ARITHMETIC_OPERATOR");
 }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 112 ".\\analizador.l"
+#line 112 "analizador.l"
 {
     print(yytext,"LOGICAL_OPERATOR");
 }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 116 ".\\analizador.l"
+#line 116 "analizador.l"
 {
     print(yytext,"ASSIGNMENT_OPERATOR");
 }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 122 ".\\analizador.l"
+#line 122 "analizador.l"
 {
     print(yytext,"CHAIN");
 }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 127 ".\\analizador.l"
+#line 127 "analizador.l"
 ECHO;
 	YY_BREAK
 #line 1094 "lex.yy.c"
@@ -1976,7 +1976,7 @@ int main()
 	return 0;
 	}
 #endif
-#line 127 ".\\analizador.l"
+#line 127 "analizador.l"
 
  
 main()
