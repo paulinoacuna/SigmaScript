@@ -1,6 +1,5 @@
 %{
- 
- 
+
 #undef yywrap
 #define yywrap() 1 
 #include <stdio.h>
@@ -12,30 +11,71 @@ void print(char *value, char *category);
  
 KEYWORDS fun|cat|if|else|while|model|set|with|return|model
 DIGIT [0-9]
-NUMBER {DIGIT}+(\.{DIGIT}+)?
+NUMBER ({DIGIT}+(\.{DIGIT}+)?)
 VARIABLE [a-zA-Z][a-zA-Z0-9]*
-ARRAY "["|"]"
+space [" "]*
+number_or_letter ({NUMBER}|{VARIABLE})
+ARRAY \[({number_or_letter},{space})*{number_or_letter}\]
+MATRIX \[({ARRAY},{space})*{ARRAY}\]
+data_type {NUMBER}|{VARIABLE}|{ARRAY}|{MATRIX}
 GROUP "("|")"
 BLOK "{"|"}"
-COMPARISON_OPERATOR ==|!=|<=|>=|<|>
+
+COMPARISON_OPERATOR (==|!=|<=|>=|<|>)
 ARITHMETIC_OPERATOR [*/+-]
 LOGICAL_OPERATOR &&|\|\|
 ASSIGNMENT_OPERATOR =
-FUNCTION_CALL {VARIABLE}\({[NUMBER|VARIABLE]*}\)
-
-ARITHMETIC_OPERATION [{NUMBER}\b{ARITHMETIC_OPERATOR}]+{NUMBER}
-
 
 CHAIN \"[a-z]*\"
- 
+
+COMPARISON_OPERATION {number_or_letter}{space}{COMPARISON_OPERATOR}{space}{number_or_letter}
+LOGICAL_OPERATION {number_or_letter}{space}{LOGICAL_OPERATOR}{space}{number_or_letter} 
+comparation {COMPARISON_OPERATION}|{LOGICAL_OPERATION}
+
+FUNCTION_CALL {VARIABLE}\(((({number_or_letter}),{space})*({number_or_letter}))?\)
+FUNCTION "fun "{FUNCTION_CALL} 
+
+ALLOCATION {VARIABLE}{space}={space}{data_type} 
+CONTROL ("if"{space}\({comparation}\))|("else if"{space}\({comparation}\))|("else"{space})
+ITERATION ("while"{space}\({comparation}\))
+
 %%
 
-{FUNCTION_CALL} {
-    print(yytext,"FUNCTION_CALL");
+{ITERATION} {
+    print(yytext, "ITERATION");
 }
+
+{CONTROL} {
+    print(yytext, "CONTROL");
+}
+
+{ALLOCATION} {
+    print(yytext, "ALLOCATION");
+}
+
+{FUNCTION} {
+    print(yytext, "FUNCTION");
+}
+
+{FUNCTION_CALL} {
+    print(yytext, "FUNCTION_CALL");
+}
+
+{LOGICAL_OPERATION} {
+    print(yytext, "LOGICAL_OPERATION");
+}
+
+{COMPARISON_OPERATION} {
+    print(yytext, "COMPARISON_OPERATION");
+}
+
 
 {ARRAY} {
     print(yytext,"ARRAY");
+}
+
+{MATRIX} {
+    print(yytext,"MATRIX");
 }
 
 
@@ -46,7 +86,6 @@ CHAIN \"[a-z]*\"
 {KEYWORDS} {
     print(yytext,"KEYWORD");
 }
-
 
 {VARIABLE} {
     print(yytext,"VARIABLE");
@@ -78,9 +117,6 @@ CHAIN \"[a-z]*\"
     print(yytext,"ASSIGNMENT_OPERATOR");
 }
 
-{ARITHMETIC_OPERATION} {
-    print(yytext,"ARITHMETIC_OPERATION");
-}
 
 
 {CHAIN} {
@@ -98,9 +134,9 @@ main()
 //function that recives the lexical category and its value and prints it
 void print(char *value, char *category)
 {
-    if(strcmp(value,";") == 1)
+    if(strcmp(value, ";") == 1)
     {
-        printf(" holo \n");
+        printf("\n");
     }
 
     
