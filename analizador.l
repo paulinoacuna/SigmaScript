@@ -29,6 +29,7 @@ NOT                     not
 BOOLEAN                 True|False
 PRINT                   print
 STRING                  str
+CAT_ALPHA               catAlpha 
 
 DIGIT                   [0-9]
 SYMBOL                  [a-z]
@@ -73,6 +74,10 @@ ITERATION               ("while"{space}\({comparation}\))
 COMMENT                 #(" ")?.*
 
 %%
+{CAT_ALPHA} {
+    print(yytext, "CAT_ALPHA");
+}
+
 {IN} {
     print(yytext, "IN");
 }
@@ -247,6 +252,10 @@ COMMENT                 #(" ")?.*
 
 {space} {
 
+}
+
+\t {
+    
 }
 
 . {
