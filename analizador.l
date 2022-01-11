@@ -59,17 +59,17 @@ data_type               {NUMBER}|{VARIABLE}|{ARRAY}|{MATRIX}
 
 COMPARISON_OPERATION    {number_or_letter}{space}{COMPARISON_OPERATOR}{space}{number_or_letter}
 LOGICAL_OPERATION       {number_or_letter}{space}{LOGICAL_OPERATOR}{space}{number_or_letter} 
-comparation             {COMPARISON_OPERATION}|{LOGICAL_OPERATION}
+comparison             {COMPARISON_OPERATION}|{LOGICAL_OPERATION}
 
 FUNCTION_CALL           {VARIABLE}\(((({number_or_letter}),{space})*({number_or_letter}))?\)
-FUNCTION                "fun "{FUNCTION_CALL}
+FUNCTION                {FUN}" "{FUNCTION_CALL}
 VARIABLE_FUNCTION       \.
 END_OF_STATEMENT        \;
 
 
 /*ALLOCATION              {VARIABLE}{space}={space}{data_type} */
-CONTROL                 ("if"{space}\({comparation}\))|("else if"{space}\({comparation}\))|("else"{space})
-ITERATION               ("while"{space}\({comparation}\))
+CONTROL                 ({IF}{space}\({comparison}\))|({ELSE}" "{IF}{space}\({comparison}\))|({ELSE}{space})
+ITERATION               ({WHILE}{space}\({comparison}\))
 
 COMMENT                 #(" ")?.*
 
