@@ -3,6 +3,7 @@
 #define yywrap() 1
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <conio.h>
 #include <string.h>
 FILE *yyin;
@@ -16,6 +17,8 @@ CAT                     cat
 IF                      if
 ELSE                    else
 WHILE                   while
+FOR                     for
+IN                      in
 MODEL                   model
 SET                     set
 WITH                    with
@@ -24,10 +27,12 @@ REAL_SET                real_set
 INT_SET                 int_set
 NOT                     not
 BOOLEAN                 True|False
+PRINT                   print
+STRING                  str
 
 DIGIT                   [0-9]
 SYMBOL                  [a-z]
-VARIABLE                [a-zA-Z]+_[a-zA-Z0-9]+
+VARIABLE                [a-zA-Z]+(_[a-zA-Z0-9]+)+
 VARIABLE_MID_SYMBOL     _
 space                   [" "]*
 GROUP                   "("|")"
@@ -38,9 +43,10 @@ COMPARISON_OPERATOR     (==|!=|<=|>=|<|>)
 ARITHMETIC_OPERATOR     [*/+-]
 LOGICAL_OPERATOR        &&|\|\|
 ASSIGNMENT_OPERATOR     =
-CHAIN                   \"
+CHAIN_SYMBOL            \"
+COMA                    \,
 
-SYMBOL_CHAIN            \"{SYMBOL}+\"
+CHAIN                   {space}*\"{SYMBOL}+\"
 NUMBER                  ({DIGIT}+(\.{DIGIT}+)?)
 
 CATEGORY_ALPHABET       \[(({SYMBOL},{space})*{SYMBOL})?\]
@@ -56,13 +62,41 @@ comparation             {COMPARISON_OPERATION}|{LOGICAL_OPERATION}
 
 FUNCTION_CALL           {VARIABLE}\(((({number_or_letter}),{space})*({number_or_letter}))?\)
 FUNCTION                "fun "{FUNCTION_CALL}
+VARIABLE_FUNCTION       \.
+END_OF_STATEMENT        \;
 
 
 /*ALLOCATION              {VARIABLE}{space}={space}{data_type} */
 CONTROL                 ("if"{space}\({comparation}\))|("else if"{space}\({comparation}\))|("else"{space})
 ITERATION               ("while"{space}\({comparation}\))
 
+COMMENT                 #(" ")?.*
+
 %%
+{IN} {
+    print(yytext, "IN");
+}
+
+{STRING} {
+    print(yytext, "STRING");
+}
+
+{FOR} {
+    print(yytext, "FOR");
+}
+
+{COMMENT} {
+    print(yytext, "COMMENT");
+}
+
+{COMA} {
+    print(yytext, "COMA");
+}
+
+{END_OF_STATEMENT} {
+    print(yytext, "END_OF_STATEMENT");
+}
+
 {FUN} {
     print(yytext, "FUN_KEYWORD");
 }
@@ -115,6 +149,10 @@ ITERATION               ("while"{space}\({comparation}\))
     print(yytext, "BOOLEAN");
 }
 
+{PRINT} {
+    print(yytext, "PRINT");
+}
+
 {ARRAY_ALPHABET} {
     print(yytext, "ARRAY_SYMBOL");
 }
@@ -123,8 +161,8 @@ ITERATION               ("while"{space}\({comparation}\))
     print(yytext, "SYMBOL");
 }
 
-{SYMBOL_CHAIN} {
-    print(yytext, "SYMBOL_CHAIN");
+{CHAIN_SYMBOL} {
+    print(yytext, "CHAIN_SYMBOL");
 }
 
 {CATEGORY_ALPHABET} {
@@ -145,6 +183,10 @@ ITERATION               ("while"{space}\({comparation}\))
 
 {FUNCTION_CALL} {
     print(yytext, "FUNCTION_CALL");
+}
+
+{VARIABLE_FUNCTION} {
+    print(yytext, "VARIABLE_FUNCTION");
 }
 
 {LOGICAL_OPERATION} {
@@ -208,7 +250,8 @@ ITERATION               ("while"{space}\({comparation}\))
 }
 
 . {
-    printf("\nCaracter invalido: %s", yytext);
+    printf("\nCaracter invalido: %s\n", yytext);
+    exit(1);
 }
  
 %%
@@ -218,8 +261,13 @@ int main()
     yylex();
 }
 */
+
+
 int main (int argc, char *argv[]){
-    argv[1] = "test01.txt";
+    char file_name[20];
+    printf("Inserte el nombre del archivo a ejecutar (con .txt): \n");
+    scanf("%s", file_name);
+    argv[1] = file_name;
     if ((yyin = fopen(argv[1], "rt")) == NULL) {
         printf("\nNo se pudo leer el archivo: %s\n", argv[1]);
         return 1;
@@ -231,6 +279,8 @@ int main (int argc, char *argv[]){
     fclose(yyin);
     return 0;
 }
+
+
  
 //function that recives the lexical category and its value and prints it
 void print(char *value, char *category)

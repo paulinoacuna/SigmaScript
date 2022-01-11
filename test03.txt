@@ -1,0 +1,34 @@
+p = int_set > 0;
+n = int_set < 0;
+
+category_alphabet = [p,n];
+
+X_1 = {7.8,3.1, 2.5,13.8,11.3,1.5,7.8,0.5}
+
+fun multicotomize_set(set set_1 ,catAlpha alpha_bet) {
+
+	str cadena_1;
+
+	for j_1 in set_1 {
+
+		# Función para asignar categoría a valor real
+
+		cadena_1.transform_to_category(j_1, alpha_bet);
+
+	}
+	print(cadena_1.number_of_steaks());
+	print(cadena_1.steak_length());
+	print(set_1);
+
+	return cadena_1;
+}
+
+# Proceso de multicotomización
+
+cadena_1 = multicotomize_set(X_1, category_aphabet);
+modelo_1 = model(a_1,t_1,b_1, M_1).to_Steak_Model();
+
+# Operaciones lógicas 
+
+if(45 < 10){}else if(45 < 20){}
+while(i < 10){}

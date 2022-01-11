@@ -1,0 +1,12 @@
+chain_one = "aaaaabbbbbccc";
+
+chain_two = "aaaaa111155ggghhh";
+
+chain_three = "aaaaabbbbbccc";
+"aaabbcc";
+
+# Esto es un comentario y hasta que no haga un salto de línea no debe considerarse nada mas
+
+cadena_4 = 359.6
+numero_98 = 98
+declaracion_erronea34 = "aaa%"
