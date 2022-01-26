@@ -1,0 +1,33 @@
+space                   [" "]*
+GROUP                   "("|")"
+BLOCK                   "{"|"}"
+ARRAY_ALPHABET          "["|"]"
+
+ALLOCATION              {VARIABLE}{space}={space}{data_type}
+
+CHAIN                   {space}*\"{SYMBOL}+\"
+
+NUMBER                  ({DIGIT}+(\.{DIGIT}+)?)
+
+CATEGORY_ALPHABET       \[(({SYMBOL},{space})*{SYMBOL})?\]
+
+number_or_letter        ({NUMBER}|{VARIABLE})
+
+ARRAY                   \[({number_or_letter},{space})*{number_or_letter}\]
+
+MATRIX                  \[({ARRAY},{space})*{ARRAY}\]
+
+data_type               {NUMBER}|{VARIABLE}|{ARRAY}|{MATRIX}
+
+COMPARISON_OPERATION    {number_or_letter}{space}{COMPARISON_OPERATOR}{space}{number_or_letter}
+
+LOGICAL_OPERATION       {number_or_letter}{space}{LOGICAL_OPERATOR}{space}{number_or_letter} 
+
+comparison             {COMPARISON_OPERATION}|{LOGICAL_OPERATION}
+
+FUNCTION_CALL           {VARIABLE}\(((({number_or_letter}),{space})*({number_or_letter}))?\)
+
+FUNCTION                {FUN}" "{FUNCTION_CALL}
+
+CONTROL                 ({IF}{space}\({comparison}\))|({ELSE}" "{IF}{space}\({comparison}\))|({ELSE}{space})
+ITERATION               ({WHILE}{space}\({comparison}\))
