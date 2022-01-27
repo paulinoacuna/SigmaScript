@@ -11,6 +11,8 @@ FILE *yyin;
 void print(char *value, char *category);
 
 %}
+
+%option yylineno
 /* KEYWORDS */
 FUN                     fun|FUN
 CAT                     cat|CAT
@@ -36,6 +38,7 @@ DIGIT                   [0-9]
 SYMBOL                  [a-z]
 VARIABLE                [a-zA-Z]+(_[a-zA-Z0-9]+)+
 VARIABLE_MID_SYMBOL     _
+
 space                   [" "]*
 TOKEN_LEFT_PAR          "("
 TOKEN_RIGHT_PAR         ")"
@@ -63,8 +66,9 @@ ASSIGNMENT_OPERATOR     =
 CHAIN_SYMBOL            \"
 COMA                    \,
 
-CHAIN                   {space}*\"{SYMBOL}+\"
-NUMBER                  ({DIGIT}+(\.{DIGIT}+)?)
+TOKEN_CHAIN             {space}*\"{SYMBOL}+\"
+TOKEN_INTEGER           {DIGIT}+
+TOKEN_FLOAT             {DIGIT}+(\.{DIGIT}+)
 
 PARAMETER_FUNCTION      \.
 END_OF_STATEMENT        \;
@@ -217,8 +221,12 @@ COMMENT                 #(" ")?.*
     print(yytext, "CHAIN_SYMBOL");
 }
 
-{NUMBER} {
-    print(yytext,"NUMBER");
+{TOKEN_INTEGER} {
+    print(yytext,"TOKEN_INT");
+}
+
+{TOKEN_FLOAT} {
+    print(yytext,"TOKEN_FLOAT");
 }
 
 {VARIABLE} {
@@ -261,8 +269,8 @@ COMMENT                 #(" ")?.*
     print(yytext,"PARAMETER_FUNCTION");
 }
 
-{CHAIN} {
-    print(yytext,"CHAIN");
+{TOKEN_CHAIN} {
+    print(yytext,"TOKEN_CHAIN");
 }
 
 {space} {
@@ -274,19 +282,20 @@ COMMENT                 #(" ")?.*
 }
 
 . {
-    printf("\nCaracter invalido: %s\n", yytext);
+    printf("\n\nCARACTER INVALIDO: Linea %d: %s\n", yylineno, yytext);
+    printf("\nCerrando analizador lexico...\n");
     exit(1);
 }
  
 %%
-/*
+
 int main()
 {
     yylex();
 }
-*/
 
 
+/*
 int main (int argc, char *argv[]){
     char file_name[20];
     printf("Inserte el nombre del archivo a ejecutar (con .txt): \n");
@@ -303,7 +312,7 @@ int main (int argc, char *argv[]){
     fclose(yyin);
     return 0;
 }
-
+*/
 
  
 //function that recives the lexical category and its value and prints it

@@ -261,9 +261,13 @@ static void yy_flex_free YY_PROTO(( void * ));
 
 #define YY_AT_BOL() (yy_current_buffer->yy_at_bol)
 
+
+#define YY_USES_REJECT
 typedef unsigned char YY_CHAR;
 FILE *yyin = (FILE *) 0, *yyout = (FILE *) 0;
 typedef int yy_state_type;
+extern int yylineno;
+int yylineno = 1;
 extern char *yytext;
 #define yytext_ptr yytext
 
@@ -282,29 +286,53 @@ static void yy_fatal_error YY_PROTO(( yyconst char msg[] ));
 	*yy_cp = '\0'; \
 	yy_c_buf_p = yy_cp;
 
-#define YY_NUM_RULES 52
-#define YY_END_OF_BUFFER 53
-static yyconst short int yy_accept[176] =
+#define YY_NUM_RULES 53
+#define YY_END_OF_BUFFER 54
+static yyconst short int yy_acclist[182] =
     {   0,
-       49,   49,   53,   51,   50,   52,   49,   51,   36,   17,
-       51,   40,   41,    9,   11,   18,   12,   47,   10,   37,
-       19,    7,   46,    8,   51,   51,   51,   51,   51,   51,
-       51,   51,   51,   51,   51,   51,   44,   45,   39,   35,
-       35,   35,   35,   35,   35,   35,   35,   35,   35,   35,
-       42,   51,   43,   49,   49,    4,    0,   17,   17,    1,
-        0,   37,    5,    3,    6,    0,    0,    0,    0,    0,
-        0,    0,    0,   22,   14,    0,    0,    0,    0,    0,
-        0,    0,    0,    0,    0,    0,    0,    0,    0,   14,
-        0,    0,    0,    0,    0,    0,    0,    0,    2,   48,
+       50,   50,   54,   52,   53,   51,   52,   53,   53,   50,
+       52,   53,   52,   53,   36,   50,   52,   53,   17,   52,
+       53,   52,   53,   41,   52,   53,   42,   52,   53,    9,
+       52,   53,   11,   52,   53,   18,   52,   53,   12,   52,
+       53,   48,   52,   53,   10,   52,   53,   37,   52,   53,
+       19,   52,   53,    7,   52,   53,   47,   52,   53,    8,
+       52,   53,   52,   53,   52,   53,   52,   53,   52,   53,
+       52,   53,   52,   53,   52,   53,   52,   53,   52,   53,
+       52,   53,   52,   53,   52,   53,   45,   52,   53,   46,
+       52,   53,   40,   52,   53,   35,   52,   53,   35,   52,
 
-       37,   38,   21,    0,    0,   16,   20,    0,    0,    0,
-       31,    0,    0,    0,   26,   15,    0,    0,    0,    0,
-       21,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-       23,    0,    0,    0,    0,    0,    0,    0,   32,    0,
-       27,    0,    0,    0,    0,    0,    0,    0,    0,   33,
-       38,   25,   34,    0,    0,   24,    0,   38,    0,    0,
-        0,   38,   38,   28,    0,   38,   38,    0,   30,   38,
-        0,   38,   13,   29,    0
+       53,   35,   52,   53,   35,   52,   53,   35,   52,   53,
+       35,   52,   53,   35,   52,   53,   35,   52,   53,   35,
+       52,   53,   35,   52,   53,   35,   52,   53,   43,   52,
+       53,   52,   53,   44,   52,   53,   50,   50,    4,   17,
+       17,    1,   37,    5,    3,    6,   22,   14,   14,    2,
+       49,   38,   39,   21,   16,   20,   31,   26,   15,   21,
+       23,   32,   27,   33,   39,   25,   34,   24,   39,   39,
+       39,   28,   39,   39,   30,   39,   39,   39,   13,   29,
+       39
+    } ;
+
+static yyconst short int yy_accept[177] =
+    {   0,
+        1,    2,    3,    4,    6,    9,   10,   13,   15,   19,
+       22,   24,   27,   30,   33,   36,   39,   42,   45,   48,
+       51,   54,   57,   60,   63,   65,   67,   69,   71,   73,
+       75,   77,   79,   81,   83,   85,   87,   90,   93,   96,
+       99,  102,  105,  108,  111,  114,  117,  120,  123,  126,
+      129,  132,  134,  137,  138,  139,  140,  140,  141,  142,
+      143,  143,  144,  145,  146,  147,  147,  147,  147,  147,
+      147,  147,  147,  147,  148,  149,  149,  149,  149,  149,
+      149,  149,  149,  149,  149,  149,  149,  149,  149,  149,
+      150,  150,  150,  150,  150,  150,  150,  150,  150,  151,
+
+      152,  153,  154,  155,  155,  155,  156,  157,  157,  157,
+      157,  158,  158,  158,  158,  159,  160,  160,  160,  160,
+      160,  161,  161,  161,  161,  161,  161,  161,  161,  161,
+      161,  162,  162,  162,  162,  162,  162,  162,  162,  163,
+      163,  164,  164,  164,  164,  164,  164,  164,  164,  164,
+      165,  166,  167,  168,  168,  168,  169,  169,  170,  170,
+      170,  170,  171,  172,  173,  173,  174,  175,  175,  177,
+      178,  178,  179,  180,  182,  182
     } ;
 
 static yyconst int yy_ec[256] =
@@ -494,13 +522,16 @@ static yyconst short int yy_chk[406] =
       175,  175,  175,  175,  175
     } ;
 
-static yy_state_type yy_last_accepting_state;
-static char *yy_last_accepting_cpos;
-
-/* The intent behind this definition is that it'll catch
- * any uses of REJECT which flex missed.
- */
-#define REJECT reject_used_but_not_detected
+static yy_state_type yy_state_buf[YY_BUF_SIZE + 2], *yy_state_ptr;
+static char *yy_full_match;
+static int yy_lp;
+#define REJECT \
+{ \
+*yy_cp = yy_hold_char; /* undo effects of setting up yytext */ \
+yy_cp = yy_full_match; /* restore poss. backed-over text */ \
+++yy_lp; \
+goto find_rule; \
+}
 #define yymore() yymore_used_but_not_detected
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
@@ -520,7 +551,7 @@ FILE *yyin;
 void print(char *value, char *category);
 
 /* KEYWORDS */
-#line 524 "lex.yy.c"
+#line 555 "lex.yy.c"
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -671,10 +702,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 74 "analizador.l"
+#line 78 "analizador.l"
 
 
-#line 678 "lex.yy.c"
+#line 709 "lex.yy.c"
 
 	if ( yy_init )
 		{
@@ -713,15 +744,12 @@ YY_DECL
 		yy_bp = yy_cp;
 
 		yy_current_state = yy_start;
+		yy_state_ptr = yy_state_buf;
+		*yy_state_ptr++ = yy_current_state;
 yy_match:
 		do
 			{
 			register YY_CHAR yy_c = yy_ec[YY_SC_TO_UI(*yy_cp)];
-			if ( yy_accept[yy_current_state] )
-				{
-				yy_last_accepting_state = yy_current_state;
-				yy_last_accepting_cpos = yy_cp;
-				}
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
@@ -729,400 +757,419 @@ yy_match:
 					yy_c = yy_meta[(unsigned int) yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
+			*yy_state_ptr++ = yy_current_state;
 			++yy_cp;
 			}
 		while ( yy_base[yy_current_state] != 342 );
 
 yy_find_action:
-		yy_act = yy_accept[yy_current_state];
-		if ( yy_act == 0 )
-			{ /* have to back up */
-			yy_cp = yy_last_accepting_cpos;
-			yy_current_state = yy_last_accepting_state;
-			yy_act = yy_accept[yy_current_state];
+		yy_current_state = *--yy_state_ptr;
+		yy_lp = yy_accept[yy_current_state];
+find_rule: /* we branch to this label when backing up */
+		for ( ; ; ) /* until we find what rule we matched */
+			{
+			if ( yy_lp && yy_lp < yy_accept[yy_current_state + 1] )
+				{
+				yy_act = yy_acclist[yy_lp];
+					{
+					yy_full_match = yy_cp;
+					break;
+					}
+				}
+			--yy_cp;
+			yy_current_state = *--yy_state_ptr;
+			yy_lp = yy_accept[yy_current_state];
 			}
 
 		YY_DO_BEFORE_ACTION;
 
+		if ( yy_act != YY_END_OF_BUFFER )
+			{
+			int yyl;
+			for ( yyl = 0; yyl < yyleng; ++yyl )
+				if ( yytext[yyl] == '\n' )
+					++yylineno;
+			}
 
 do_action:	/* This label is used only to access EOF actions. */
 
 
 		switch ( yy_act )
 	{ /* beginning of action switch */
-			case 0: /* must back up */
-			/* undo the effects of YY_DO_BEFORE_ACTION */
-			*yy_cp = yy_hold_char;
-			yy_cp = yy_last_accepting_cpos;
-			yy_current_state = yy_last_accepting_state;
-			goto yy_find_action;
-
 case 1:
 YY_RULE_SETUP
-#line 76 "analizador.l"
+#line 80 "analizador.l"
 {
     print(yytext, "TOKEN_AND");
 }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 80 "analizador.l"
+#line 84 "analizador.l"
 {
     print(yytext, "TOKEN_OR");
 }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 84 "analizador.l"
+#line 88 "analizador.l"
 {
     print(yytext, "TOKEN_EQ");
 }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 88 "analizador.l"
+#line 92 "analizador.l"
 {
     print(yytext, "TOKEN_NOT_EQ");
 }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 92 "analizador.l"
+#line 96 "analizador.l"
 {
     print(yytext, "TOKEN_LESS_EQ");
 }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 96 "analizador.l"
+#line 100 "analizador.l"
 {
     print(yytext, "TOKEN_GREA_EQ");
 }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 100 "analizador.l"
+#line 104 "analizador.l"
 {
     print(yytext, "TOKEN_LESS");
 }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 104 "analizador.l"
+#line 108 "analizador.l"
 {
     print(yytext, "TOKEN_GREA");
 }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 108 "analizador.l"
+#line 112 "analizador.l"
 {
     print(yytext, "TOKEN_MUL");
 }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 112 "analizador.l"
+#line 116 "analizador.l"
 {
     print(yytext, "TOKEN_DIV");
 }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 116 "analizador.l"
+#line 120 "analizador.l"
 {
     print(yytext, "TOKEN_SUM");
 }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 120 "analizador.l"
+#line 124 "analizador.l"
 {
     print(yytext, "TOKEN_DIF");
 }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 124 "analizador.l"
+#line 128 "analizador.l"
 {
     print(yytext, "CAT_ALPHA");
 }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 128 "analizador.l"
+#line 132 "analizador.l"
 {
     print(yytext, "IN");
 }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 132 "analizador.l"
+#line 136 "analizador.l"
 {
     print(yytext, "STRING");
 }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 136 "analizador.l"
+#line 140 "analizador.l"
 {
     print(yytext, "FOR");
 }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 140 "analizador.l"
+#line 144 "analizador.l"
 {
     print(yytext, "COMMENT");
 }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 144 "analizador.l"
+#line 148 "analizador.l"
 {
     print(yytext, "COMA");
 }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 148 "analizador.l"
+#line 152 "analizador.l"
 {
     print(yytext, "END_OF_STATEMENT");
 }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 152 "analizador.l"
+#line 156 "analizador.l"
 {
     print(yytext, "FUN_KEYWORD");
 }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 156 "analizador.l"
+#line 160 "analizador.l"
 {
     print(yytext, "CAT_KEYWORD");
 }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 160 "analizador.l"
+#line 164 "analizador.l"
 {
     print(yytext, "IF_KEYWORD");
 }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 164 "analizador.l"
+#line 168 "analizador.l"
 {
     print(yytext, "ELSE_KEYWORD");
 }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 168 "analizador.l"
+#line 172 "analizador.l"
 {
     print(yytext, "WHILE_KEYWORD");
 }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 172 "analizador.l"
+#line 176 "analizador.l"
 {
     print(yytext, "IF_KEYWORD");
 }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 176 "analizador.l"
+#line 180 "analizador.l"
 {
     print(yytext, "SET_KEYWORD");
 }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 180 "analizador.l"
+#line 184 "analizador.l"
 {
     print(yytext, "WITH_KEYWORD");
 }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 184 "analizador.l"
+#line 188 "analizador.l"
 {
     print(yytext, "RETURN_KEYWORD");
 }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 188 "analizador.l"
+#line 192 "analizador.l"
 {
     print(yytext, "REAL_SET_KEYWORD");
 }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 192 "analizador.l"
+#line 196 "analizador.l"
 {
     print(yytext, "INT_SET_KEYWORD");
 }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 196 "analizador.l"
+#line 200 "analizador.l"
 {
     print(yytext, "NOT_KEYWORD");
 }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 200 "analizador.l"
+#line 204 "analizador.l"
 {
     print(yytext, "TRUE_BOOLEAN");
 }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 204 "analizador.l"
+#line 208 "analizador.l"
 {
     print(yytext, "FALSE_BOOLEAN");
 }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 208 "analizador.l"
+#line 212 "analizador.l"
 {
     print(yytext, "PRINT");
 }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 212 "analizador.l"
+#line 216 "analizador.l"
 {
     print(yytext, "SYMBOL");
 }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 216 "analizador.l"
+#line 220 "analizador.l"
 {
     print(yytext, "CHAIN_SYMBOL");
 }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 220 "analizador.l"
+#line 224 "analizador.l"
 {
-    print(yytext,"NUMBER");
+    print(yytext,"TOKEN_INT");
 }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 224 "analizador.l"
+#line 228 "analizador.l"
 {
-    print(yytext,"VARIABLE");
+    print(yytext,"TOKEN_FLOAT");
 }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 228 "analizador.l"
+#line 232 "analizador.l"
 {
-    print(yytext, "VARIABLE_MID_SYMBOL");
+    print(yytext,"VARIABLE");
 }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 232 "analizador.l"
+#line 236 "analizador.l"
 {
-    print(yytext,"TOKEN_LEFT_PAR");
+    print(yytext, "VARIABLE_MID_SYMBOL");
 }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 236 "analizador.l"
+#line 240 "analizador.l"
 {
-    print(yytext,"TOKEN_RIGHT_PAR");
+    print(yytext,"TOKEN_LEFT_PAR");
 }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 240 "analizador.l"
+#line 244 "analizador.l"
 {
-    print(yytext,"TOKEN_LEFT_KEY");
+    print(yytext,"TOKEN_RIGHT_PAR");
 }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 244 "analizador.l"
+#line 248 "analizador.l"
 {
-    print(yytext,"TOKEN_RIGHT_KEY");
+    print(yytext,"TOKEN_LEFT_KEY");
 }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 248 "analizador.l"
+#line 252 "analizador.l"
 {
-    print(yytext,"TOKEN_LEFT_SQR");
+    print(yytext,"TOKEN_RIGHT_KEY");
 }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 252 "analizador.l"
+#line 256 "analizador.l"
 {
-    print(yytext,"TOKEN_RIGHT_SQR");
+    print(yytext,"TOKEN_LEFT_SQR");
 }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 256 "analizador.l"
+#line 260 "analizador.l"
 {
-    print(yytext,"ASSIGNMENT_OPERATOR");
+    print(yytext,"TOKEN_RIGHT_SQR");
 }
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 260 "analizador.l"
+#line 264 "analizador.l"
 {
-    print(yytext,"PARAMETER_FUNCTION");
+    print(yytext,"ASSIGNMENT_OPERATOR");
 }
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 264 "analizador.l"
+#line 268 "analizador.l"
 {
-    print(yytext,"CHAIN");
+    print(yytext,"PARAMETER_FUNCTION");
 }
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 268 "analizador.l"
+#line 272 "analizador.l"
 {
-
+    print(yytext,"TOKEN_CHAIN");
 }
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 272 "analizador.l"
+#line 276 "analizador.l"
 {
-    
+
 }
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 276 "analizador.l"
+#line 280 "analizador.l"
 {
-    printf("\nCaracter invalido: %s\n", yytext);
-    exit(1);
+    
 }
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 281 "analizador.l"
+#line 284 "analizador.l"
+{
+    printf("\n\nCARACTER INVALIDO: Linea %d: %s\n", yylineno, yytext);
+    printf("\nCerrando analizador lexico...\n");
+    exit(1);
+}
+	YY_BREAK
+case 53:
+YY_RULE_SETUP
+#line 290 "analizador.l"
 ECHO;
 	YY_BREAK
-#line 1124 "lex.yy.c"
-case YY_STATE_EOF(INITIAL):
-	yyterminate();
+#line 1171 "lex.yy.c"
+			case YY_STATE_EOF(INITIAL):
+				yyterminate();
 
 	case YY_END_OF_BUFFER:
 		{
@@ -1400,15 +1447,12 @@ static yy_state_type yy_get_previous_state()
 	register char *yy_cp;
 
 	yy_current_state = yy_start;
+	yy_state_ptr = yy_state_buf;
+	*yy_state_ptr++ = yy_current_state;
 
 	for ( yy_cp = yytext_ptr + YY_MORE_ADJ; yy_cp < yy_c_buf_p; ++yy_cp )
 		{
 		register YY_CHAR yy_c = (*yy_cp ? yy_ec[YY_SC_TO_UI(*yy_cp)] : 1);
-		if ( yy_accept[yy_current_state] )
-			{
-			yy_last_accepting_state = yy_current_state;
-			yy_last_accepting_cpos = yy_cp;
-			}
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
@@ -1416,6 +1460,7 @@ static yy_state_type yy_get_previous_state()
 				yy_c = yy_meta[(unsigned int) yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
+		*yy_state_ptr++ = yy_current_state;
 		}
 
 	return yy_current_state;
@@ -1436,14 +1481,8 @@ yy_state_type yy_current_state;
 #endif
 	{
 	register int yy_is_jam;
-	register char *yy_cp = yy_c_buf_p;
 
 	register YY_CHAR yy_c = 1;
-	if ( yy_accept[yy_current_state] )
-		{
-		yy_last_accepting_state = yy_current_state;
-		yy_last_accepting_cpos = yy_cp;
-		}
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
@@ -1452,6 +1491,8 @@ yy_state_type yy_current_state;
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
 	yy_is_jam = (yy_current_state == 175);
+	if ( ! yy_is_jam )
+		*yy_state_ptr++ = yy_current_state;
 
 	return yy_is_jam ? 0 : yy_current_state;
 	}
@@ -1494,6 +1535,8 @@ register char *yy_bp;
 
 	*--yy_cp = (char) c;
 
+	if ( c == '\n' )
+		--yylineno;
 
 	yytext_ptr = yy_bp;
 	yy_hold_char = *yy_cp;
@@ -1570,6 +1613,8 @@ static int input()
 	*yy_c_buf_p = '\0';	/* preserve yytext */
 	yy_hold_char = *++yy_c_buf_p;
 
+	if ( c == '\n' )
+		++yylineno;
 
 	return c;
 	}
@@ -2006,16 +2051,16 @@ int main()
 	return 0;
 	}
 #endif
-#line 281 "analizador.l"
+#line 290 "analizador.l"
 
-/*
+
 int main()
 {
     yylex();
 }
-*/
 
 
+/*
 int main (int argc, char *argv[]){
     char file_name[20];
     printf("Inserte el nombre del archivo a ejecutar (con .txt): \n");
@@ -2032,7 +2077,7 @@ int main (int argc, char *argv[]){
     fclose(yyin);
     return 0;
 }
-
+*/
 
  
 //function that recives the lexical category and its value and prints it
