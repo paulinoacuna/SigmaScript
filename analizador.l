@@ -1,11 +1,14 @@
 %{
 
 #define yywrap() 1
+
 #include <stdio.h>
+#include <curses.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <conio.h>
+//#include <conio.h>
 #include <string.h>
+
 FILE *yyin;
 
 void print(char *value, char *category);

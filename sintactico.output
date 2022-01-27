@@ -1,0 +1,215 @@
+Terminals unused in grammar
+
+    SYMBOL
+    VARIABLE
+    TOKEN_EQ
+    TOKEN_NOT_EQ
+    TOKEN_LESS_EQ
+    TOKEN_GREA_EQ
+    TOKEN_LESS
+    TOKEN_GREA
+    TOKEN_AND
+    TOKEN_OR
+    CHAIN
+
+
+State 8 conflicts: 4 shift/reduce
+State 9 conflicts: 4 shift/reduce
+State 10 conflicts: 4 shift/reduce
+State 11 conflicts: 4 shift/reduce
+
+
+Grammar
+
+    0 $accept: expr $end
+
+    1 expr: expr TOKEN_SUM expr
+    2     | expr TOKEN_DIF expr
+    3     | expr TOKEN_MUL expr
+    4     | expr TOKEN_DIV expr
+    5     | NUMBER
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    error (256)
+    SYMBOL <character> (258)
+    VARIABLE (259)
+    NUMBER <integer> (260) 5
+    TOKEN_MUL (261) 3
+    TOKEN_DIV (262) 4
+    TOKEN_SUM (263) 1
+    TOKEN_DIF (264) 2
+    TOKEN_EQ (265)
+    TOKEN_NOT_EQ (266)
+    TOKEN_LESS_EQ (267)
+    TOKEN_GREA_EQ (268)
+    TOKEN_LESS (269)
+    TOKEN_GREA (270)
+    TOKEN_AND (271)
+    TOKEN_OR (272)
+    CHAIN <string> (273)
+
+
+Nonterminals, with rules where they appear
+
+    $accept (19)
+        on left: 0
+    expr <integer> (20)
+        on left: 1 2 3 4 5
+        on right: 0 1 2 3 4
+
+
+State 0
+
+    0 $accept: . expr $end
+
+    NUMBER  shift, and go to state 1
+
+    expr  go to state 2
+
+
+State 1
+
+    5 expr: NUMBER .
+
+    $default  reduce using rule 5 (expr)
+
+
+State 2
+
+    0 $accept: expr . $end
+    1 expr: expr . TOKEN_SUM expr
+    2     | expr . TOKEN_DIF expr
+    3     | expr . TOKEN_MUL expr
+    4     | expr . TOKEN_DIV expr
+
+    $end       shift, and go to state 3
+    TOKEN_MUL  shift, and go to state 4
+    TOKEN_DIV  shift, and go to state 5
+    TOKEN_SUM  shift, and go to state 6
+    TOKEN_DIF  shift, and go to state 7
+
+
+State 3
+
+    0 $accept: expr $end .
+
+    $default  accept
+
+
+State 4
+
+    3 expr: expr TOKEN_MUL . expr
+
+    NUMBER  shift, and go to state 1
+
+    expr  go to state 8
+
+
+State 5
+
+    4 expr: expr TOKEN_DIV . expr
+
+    NUMBER  shift, and go to state 1
+
+    expr  go to state 9
+
+
+State 6
+
+    1 expr: expr TOKEN_SUM . expr
+
+    NUMBER  shift, and go to state 1
+
+    expr  go to state 10
+
+
+State 7
+
+    2 expr: expr TOKEN_DIF . expr
+
+    NUMBER  shift, and go to state 1
+
+    expr  go to state 11
+
+
+State 8
+
+    1 expr: expr . TOKEN_SUM expr
+    2     | expr . TOKEN_DIF expr
+    3     | expr . TOKEN_MUL expr
+    3     | expr TOKEN_MUL expr .
+    4     | expr . TOKEN_DIV expr
+
+    TOKEN_MUL  shift, and go to state 4
+    TOKEN_DIV  shift, and go to state 5
+    TOKEN_SUM  shift, and go to state 6
+    TOKEN_DIF  shift, and go to state 7
+
+    TOKEN_MUL  [reduce using rule 3 (expr)]
+    TOKEN_DIV  [reduce using rule 3 (expr)]
+    TOKEN_SUM  [reduce using rule 3 (expr)]
+    TOKEN_DIF  [reduce using rule 3 (expr)]
+    $default   reduce using rule 3 (expr)
+
+
+State 9
+
+    1 expr: expr . TOKEN_SUM expr
+    2     | expr . TOKEN_DIF expr
+    3     | expr . TOKEN_MUL expr
+    4     | expr . TOKEN_DIV expr
+    4     | expr TOKEN_DIV expr .
+
+    TOKEN_MUL  shift, and go to state 4
+    TOKEN_DIV  shift, and go to state 5
+    TOKEN_SUM  shift, and go to state 6
+    TOKEN_DIF  shift, and go to state 7
+
+    TOKEN_MUL  [reduce using rule 4 (expr)]
+    TOKEN_DIV  [reduce using rule 4 (expr)]
+    TOKEN_SUM  [reduce using rule 4 (expr)]
+    TOKEN_DIF  [reduce using rule 4 (expr)]
+    $default   reduce using rule 4 (expr)
+
+
+State 10
+
+    1 expr: expr . TOKEN_SUM expr
+    1     | expr TOKEN_SUM expr .
+    2     | expr . TOKEN_DIF expr
+    3     | expr . TOKEN_MUL expr
+    4     | expr . TOKEN_DIV expr
+
+    TOKEN_MUL  shift, and go to state 4
+    TOKEN_DIV  shift, and go to state 5
+    TOKEN_SUM  shift, and go to state 6
+    TOKEN_DIF  shift, and go to state 7
+
+    TOKEN_MUL  [reduce using rule 1 (expr)]
+    TOKEN_DIV  [reduce using rule 1 (expr)]
+    TOKEN_SUM  [reduce using rule 1 (expr)]
+    TOKEN_DIF  [reduce using rule 1 (expr)]
+    $default   reduce using rule 1 (expr)
+
+
+State 11
+
+    1 expr: expr . TOKEN_SUM expr
+    2     | expr . TOKEN_DIF expr
+    2     | expr TOKEN_DIF expr .
+    3     | expr . TOKEN_MUL expr
+    4     | expr . TOKEN_DIV expr
+
+    TOKEN_MUL  shift, and go to state 4
+    TOKEN_DIV  shift, and go to state 5
+    TOKEN_SUM  shift, and go to state 6
+    TOKEN_DIF  shift, and go to state 7
+
+    TOKEN_MUL  [reduce using rule 2 (expr)]
+    TOKEN_DIV  [reduce using rule 2 (expr)]
+    TOKEN_SUM  [reduce using rule 2 (expr)]
+    TOKEN_DIF  [reduce using rule 2 (expr)]
+    $default   reduce using rule 2 (expr)

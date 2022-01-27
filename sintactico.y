@@ -1,39 +1,49 @@
 %{ 
 #include <stdio.h>
-#include "header.h"    
+#include<stdbool.h>
+#include <stdlib.h>
+
+extern int yylex();
+extern int yyparse();
+extern FILE* yyin;
+
+void yyerror(const char* s);
+
 %}
 
 
 
 
 %union {
-    int entero;
+    int integer;
     float real;
 
-    bool booleano;
+    char *string;
+    char character;
 
-    char *cadena;
-    char caracter;
-
-    int arreglo[10];
+    int array[5];
     
     
 }
 
+%token <character> SYMBOL
 
-%token <caracter> SYMBOL
+%token VARIABLE
 
-%token <cadena> CHAIN
+%token <integer> NUMBER
 
-token <cadena> VARIABLE
+%token TOKEN_MUL TOKEN_DIV TOKEN_SUM TOKEN_DIF
 
-%token <entero> NUMBER
+%token TOKEN_EQ TOKEN_NOT_EQ TOKEN_LESS_EQ TOKEN_GREA_EQ TOKEN_LESS TOKEN_GREA   
 
-%token ARITHMETIC_OPERATOR
+%token TOKEN_AND TOKEN_OR
 
+%token <string> CHAIN
 
+%type <integer> expr
 
 %%
+//el array[5] por defecto crea un array de long 5
 //en %union se definen los tipos de datos, se pueden usar objetos
 //por defecto estos tokens son de tipo int
 //tokens del lexico, mantener nombre
@@ -46,7 +56,11 @@ token <cadena> VARIABLE
 
 
 
-expr : expr ARITHMETIC_OPERATOR expr { $$ = $1 + $3; }
+expr : expr TOKEN_SUM expr { $$ = $1 + $3; }
+        | expr TOKEN_DIF expr {$$ = $1 - $3; }
+        | expr TOKEN_MUL expr {$$ = $1 * $3; }
+        | expr TOKEN_DIV expr {$$ = $1 / $3; }
+        | NUMBER {$$ = $1; }
 ;
 
 
@@ -54,4 +68,20 @@ expr : expr ARITHMETIC_OPERATOR expr { $$ = $1 + $3; }
 
 
 %%
-//codigo de usuario
+
+
+
+int main() {
+	yyin = stdin;
+
+	do {
+		yyparse();
+	} while(!feof(yyin));
+
+	return 0;
+}
+
+void yyerror(const char* s) {
+	fprintf(stderr, "Parse error: %s\n", s);
+	exit(1);
+}
