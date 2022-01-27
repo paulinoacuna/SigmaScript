@@ -12,37 +12,53 @@ void print(char *value, char *category);
 
 %}
 /* KEYWORDS */
-FUN                     fun
-CAT                     cat
-IF                      if
-ELSE                    else
-WHILE                   while
-FOR                     for
-IN                      in
-MODEL                   model
-SET                     set
-WITH                    with
-RETURN                  return
-REAL_SET                real_set
-INT_SET                 int_set
-NOT                     not
-BOOLEAN                 True|False
-PRINT                   print
-STRING                  str
-CAT_ALPHA               catAlpha 
+FUN                     fun|FUN
+CAT                     cat|CAT
+IF                      if|IF
+ELSE                    else|ELSE
+WHILE                   while|WHILE
+FOR                     for|FOR
+IN                      in|IN
+MODEL                   model|MODEL
+SET                     set|SET
+WITH                    with|WITH
+RETURN                  return|RETURN
+REAL_SET                real_set|REAL_SET
+INT_SET                 int_set|INT_SET
+NOT                     not|NOT
+TRUE_BOOLEAN            True|TRUE
+FALSE_BOOLEAN           False|FALSE
+PRINT                   print|PRINT
+STRING                  str|STR
+CAT_ALPHA               catAlpha|CATALPHA 
 
 DIGIT                   [0-9]
 SYMBOL                  [a-z]
 VARIABLE                [a-zA-Z]+(_[a-zA-Z0-9]+)+
 VARIABLE_MID_SYMBOL     _
 space                   [" "]*
-GROUP                   "("|")"
-BLOCK                   "{"|"}"
-ARRAY_ALPHABET          "["|"]"
+TOKEN_LEFT_PAR          "("
+TOKEN_RIGHT_PAR         ")"
+TOKEN_LEFT_KEY          "{"
+TOKEN_RIGHT_KEY         "}"
+TOKEN_LEFT_SQR          "["
+TOKEN_RIGHT_SQR         "]"       
 
-COMPARISON_OPERATOR     (==|!=|<=|>=|<|>)
-ARITHMETIC_OPERATOR     [*/+-]
-LOGICAL_OPERATOR        &&|\|\|
+TOKEN_EQ                "=="
+TOKEN_NOT_EQ            "!="
+TOKEN_LESS_EQ           "<="
+TOKEN_GREA_EQ           ">="
+TOKEN_LESS              "<"
+TOKEN_GREA              ">"
+
+TOKEN_MUL               "*"
+TOKEN_DIV               "/"
+TOKEN_SUM               "+"
+TOKEN_DIF               "-"
+
+TOKEN_AND               "&&"
+TOKEN_OR                "||"
+
 ASSIGNMENT_OPERATOR     =
 CHAIN_SYMBOL            \"
 COMA                    \,
@@ -50,30 +66,61 @@ COMA                    \,
 CHAIN                   {space}*\"{SYMBOL}+\"
 NUMBER                  ({DIGIT}+(\.{DIGIT}+)?)
 
-CATEGORY_ALPHABET       \[(({SYMBOL},{space})*{SYMBOL})?\]
-
-number_or_letter        ({NUMBER}|{VARIABLE})
-ARRAY                   \[({number_or_letter},{space})*{number_or_letter}\]
-MATRIX                  \[({ARRAY},{space})*{ARRAY}\]
-data_type               {NUMBER}|{VARIABLE}|{ARRAY}|{MATRIX}
-
-COMPARISON_OPERATION    {number_or_letter}{space}{COMPARISON_OPERATOR}{space}{number_or_letter}
-LOGICAL_OPERATION       {number_or_letter}{space}{LOGICAL_OPERATOR}{space}{number_or_letter} 
-comparison             {COMPARISON_OPERATION}|{LOGICAL_OPERATION}
-
-FUNCTION_CALL           {VARIABLE}\(((({number_or_letter}),{space})*({number_or_letter}))?\)
-FUNCTION                {FUN}" "{FUNCTION_CALL}
-VARIABLE_FUNCTION       \.
+PARAMETER_FUNCTION      \.
 END_OF_STATEMENT        \;
-
-
-/*ALLOCATION              {VARIABLE}{space}={space}{data_type} */
-CONTROL                 ({IF}{space}\({comparison}\))|({ELSE}" "{IF}{space}\({comparison}\))|({ELSE}{space})
-ITERATION               ({WHILE}{space}\({comparison}\))
 
 COMMENT                 #(" ")?.*
 
 %%
+
+{TOKEN_AND} {
+    print(yytext, "TOKEN_AND");
+}
+
+{TOKEN_OR} {
+    print(yytext, "TOKEN_OR");
+}
+
+{TOKEN_EQ} {
+    print(yytext, "TOKEN_EQ");
+}
+
+{TOKEN_NOT_EQ} {
+    print(yytext, "TOKEN_NOT_EQ");
+}
+
+{TOKEN_LESS_EQ} {
+    print(yytext, "TOKEN_LESS_EQ");
+}
+
+{TOKEN_GREA_EQ} {
+    print(yytext, "TOKEN_GREA_EQ");
+}
+
+{TOKEN_LESS} {
+    print(yytext, "TOKEN_LESS");
+}
+
+{TOKEN_GREA} {
+    print(yytext, "TOKEN_GREA");
+}
+
+{TOKEN_MUL} {
+    print(yytext, "TOKEN_MUL");
+}
+
+{TOKEN_DIV} {
+    print(yytext, "TOKEN_DIV");
+}
+
+{TOKEN_SUM} {
+    print(yytext, "TOKEN_SUM");
+}
+
+{TOKEN_DIF} {
+    print(yytext, "TOKEN_DIF");
+}
+
 {CAT_ALPHA} {
     print(yytext, "CAT_ALPHA");
 }
@@ -150,16 +197,16 @@ COMMENT                 #(" ")?.*
     print(yytext, "NOT_KEYWORD");
 }
 
-{BOOLEAN} {
-    print(yytext, "BOOLEAN");
+{TRUE_BOOLEAN} {
+    print(yytext, "TRUE_BOOLEAN");
+}
+
+{FALSE_BOOLEAN} {
+    print(yytext, "TRUE_BOOLEAN");
 }
 
 {PRINT} {
     print(yytext, "PRINT");
-}
-
-{ARRAY_ALPHABET} {
-    print(yytext, "ARRAY_SYMBOL");
 }
 
 {SYMBOL} {
@@ -168,46 +215,6 @@ COMMENT                 #(" ")?.*
 
 {CHAIN_SYMBOL} {
     print(yytext, "CHAIN_SYMBOL");
-}
-
-{CATEGORY_ALPHABET} {
-    print(yytext, "CATEGORY_ALPHABET");
-}
-
-{ITERATION} {
-    print(yytext, "ITERATION");
-}
-
-{CONTROL} {
-    print(yytext, "CONTROL");
-}
-
-{FUNCTION} {
-    print(yytext, "FUNCTION");
-}
-
-{FUNCTION_CALL} {
-    print(yytext, "FUNCTION_CALL");
-}
-
-{VARIABLE_FUNCTION} {
-    print(yytext, "VARIABLE_FUNCTION");
-}
-
-{LOGICAL_OPERATION} {
-    print(yytext, "LOGICAL_OPERATION");
-}
-
-{COMPARISON_OPERATION} {
-    print(yytext, "COMPARISON_OPERATION");
-}
-
-{ARRAY} {
-    print(yytext,"ARRAY");
-}
-
-{MATRIX} {
-    print(yytext,"MATRIX");
 }
 
 {NUMBER} {
@@ -222,28 +229,36 @@ COMMENT                 #(" ")?.*
     print(yytext, "VARIABLE_MID_SYMBOL");
 }
 
-{GROUP} {
-    print(yytext,"GROUP");
+{TOKEN_LEFT_PAR} {
+    print(yytext,"TOKEN_LEFT_PAR");
 }
 
-{BLOCK} {
-    print(yytext,"BLOCK");
+{TOKEN_RIGHT_PAR} {
+    print(yytext,"TOKEN_RIGHT_PAR");
 }
 
-{COMPARISON_OPERATOR} {
-    print(yytext,"COMPARISON_OPERATOR");
+{TOKEN_LEFT_KEY} {
+    print(yytext,"TOKEN_LEFT_KEY");
 }
 
-{ARITHMETIC_OPERATOR} {
-    print(yytext,"ARITHMETIC_OPERATOR");
+{TOKEN_RIGHT_KEY} {
+    print(yytext,"TOKEN_RIGHT_KEY");
 }
 
-{LOGICAL_OPERATOR} {
-    print(yytext,"LOGICAL_OPERATOR");
+{TOKEN_LEFT_SQR} {
+    print(yytext,"TOKEN_LEFT_SQR");
+}
+
+{TOKEN_RIGHT_SQR} {
+    print(yytext,"TOKEN_RIGHT_SQR");
 }
 
 {ASSIGNMENT_OPERATOR} {
     print(yytext,"ASSIGNMENT_OPERATOR");
+}
+
+{PARAMETER_FUNCTION} {
+    print(yytext,"PARAMETER_FUNCTION");
 }
 
 {CHAIN} {
