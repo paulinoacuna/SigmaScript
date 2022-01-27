@@ -202,7 +202,7 @@ COMMENT                 #(" ")?.*
 }
 
 {FALSE_BOOLEAN} {
-    print(yytext, "TRUE_BOOLEAN");
+    print(yytext, "FALSE_BOOLEAN");
 }
 
 {PRINT} {

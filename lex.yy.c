@@ -985,7 +985,7 @@ case 33:
 YY_RULE_SETUP
 #line 204 "analizador.l"
 {
-    print(yytext, "TRUE_BOOLEAN");
+    print(yytext, "FALSE_BOOLEAN");
 }
 	YY_BREAK
 case 34:
